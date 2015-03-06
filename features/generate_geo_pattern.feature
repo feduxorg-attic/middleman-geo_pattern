@@ -36,8 +36,8 @@ Feature: Generate GeoPattern
   Scenario: Set default patterns
     Given a middleman config file with:
     """
-    activate :geo_pattern do |e|
-      e.default_patterns = [:xes]
+    activate :geo_pattern do |g|
+      g.patterns = [:xes]
     end
     """
     And a source file named "index.erb" with:
@@ -51,8 +51,8 @@ Feature: Generate GeoPattern
   Scenario: Set default color
     Given a middleman config file with:
     """
-    activate :geo_pattern do |e|
-      e.default_color = '#fff'
+    activate :geo_pattern do |g|
+      g.color = '#fff'
     end
     """
     And a source file named "index.erb" with:
@@ -66,8 +66,8 @@ Feature: Generate GeoPattern
   Scenario: Set default base color
     Given a middleman config file with:
     """
-    activate :geo_pattern do |e|
-      e.default_base_color = '#123456'
+    activate :geo_pattern do |g|
+      g.base_color = '#123456'
     end
     """
     And a source file named "index.erb" with:
@@ -81,8 +81,8 @@ Feature: Generate GeoPattern
   Scenario: Set tag as string
     Given a middleman config file with:
     """
-    activate :geo_pattern do |e|
-      e.html_tag = 'span'
+    activate :geo_pattern do |g|
+      g.html_tag = 'span'
     end
     """
     And a source file named "index.erb" with:
@@ -99,8 +99,8 @@ Feature: Generate GeoPattern
   Scenario: Set tag as string
     Given a middleman config file with:
     """
-    activate :geo_pattern do |e|
-      e.html_tag = :span
+    activate :geo_pattern do |g|
+      g.html_tag = :span
     end
     """
     And a source file named "index.erb" with:
@@ -114,7 +114,7 @@ Feature: Generate GeoPattern
     span
     """
 
-  Scenario: Use block
+  Scenario: Use block with erb
     Given a middleman config file with:
     """
     activate :geo_pattern
@@ -175,11 +175,15 @@ Feature: Generate GeoPattern
     """
     And a source file named "index.erb" with:
     """
-    <%= geo_pattern 'Mastering Markdown', html_tag: 'img', content_tag: false %>
+    <%= geo_pattern 'Mastering Markdown', html_tag: 'img', is_content_tag: false %>
     """
     And the Server is running
     When I go to "/index.html"
     Then I should see:
     """
     <img
+    """
+    And I should not see:
+    """
+    </img>
     """

@@ -2,10 +2,10 @@ module Middleman
   module GeoPattern
     # Extension namespace
     class Extension < ::Middleman::Extension
-      option :default_patterns, nil, 'Which patterns should be used'
-      option :default_color, nil, 'The color to use'
-      option :default_base_color, nil, 'The base color to use'
-      option :content_tag, true, 'Is content tag?'
+      option :patterns, nil, 'Which patterns should be used'
+      option :color, nil, 'The color to use'
+      option :base_color, nil, 'The base color to use'
+      option :is_content_tag, true, 'Is content tag?'
       option :html_tag, :div, 'Tag to generate'
 
       def initialize(app, options_hash = {}, &block)
@@ -47,12 +47,13 @@ module Middleman
         #   All other options are passed on to the tag helper
         #
         # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/ParameterLists
         def geo_pattern(
           input,
-          patterns: extensions[:geo_pattern].options.default_patterns,
-          color: extensions[:geo_pattern].options.default_color,
-          base_color: extensions[:geo_pattern].options.default_base_color,
-          content_tag: extensions[:geo_pattern].options.content_tag,
+          patterns: extensions[:geo_pattern].options.patterns,
+          color: extensions[:geo_pattern].options.color,
+          base_color: extensions[:geo_pattern].options.base_color,
+          is_content_tag: extensions[:geo_pattern].options.is_content_tag,
           html_tag: extensions[:geo_pattern].options.html_tag,
           **options,
           &block
@@ -63,25 +64,18 @@ module Middleman
             color: color,
             base_color: base_color
           )
-          tag_generator = if content_tag == true
-                             :content_tag
-                           else
-                             :tag
-                           end
 
           style = format('background-image: %s', pattern.to_data_uri)
           style += options.delete(:style) if options[:style]
 
-          public_send(
-            tag_generator,
-            html_tag,
-            nil,
-            **options,
-            style: style,
-            &block
-          )
+          # rubocop:disable Metrics/LineLength
+          return public_send(:content_tag, html_tag, nil, **options, style: style, &block) if is_content_tag == true
+          # rubocop:enable Metrics/LineLength
+
+          public_send(:tag, html_tag, **options, style: style)
         end
         # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/ParameterLists
       end
     end
   end
