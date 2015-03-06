@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'stackprof'
+  gem 'fedux_org-stdlib', require: false
+  gem 'stackprof', require: false
   gem 'rspec', require: false
   gem 'fuubar', require: false
   gem 'simplecov', require: false
