@@ -125,7 +125,7 @@ Please mind the missing `=` in `<% geo...`.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## License
+## Copyright
 
 (c) 2015, Max Meyer
 
