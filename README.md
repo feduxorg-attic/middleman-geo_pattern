@@ -1,5 +1,10 @@
 # middleman-geo_pattern
 
+[![Gem Version](https://badge.fury.io/rb/middleman-geo_pattern.svg)](http://badge.fury.io/rb/middleman-geo_pattern)
+[![Build Status](https://travis-ci.org/fedux-org/middleman-geo_pattern.png?branch=master)](https://travis-ci.org/fedux-org/middleman-geo_pattern)
+[![Coverage Status](https://coveralls.io/repos/maxmeyer/middleman-geo_pattern/badge.png?branch=master)](https://coveralls.io/r/maxmeyer/middleman-geo_pattern?branch=master)
+[![Inline docs](http://inch-ci.org/github/maxmeyer/middleman-geo_pattern.svg?branch=master)](http://inch-ci.org/github/maxmeyer/middleman-geo_pattern)
+
 This gem integrates the
 [`geo_pattern`](https://github.com/jasonlong/geo_pattern)-gem into
 [`middleman`](https://middlemanapp.com/).
