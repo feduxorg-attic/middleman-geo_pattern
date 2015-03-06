@@ -5,6 +5,7 @@ module Middleman
       option :default_patterns, nil, 'Which patterns should be used'
       option :default_color, nil, 'The color to use'
       option :default_base_color, nil, 'The base color to use'
+      option :content_tag, true, 'Is content tag?'
       option :html_tag, :div, 'Tag to generate'
 
       def initialize(app, options_hash = {}, &block)
@@ -51,6 +52,8 @@ module Middleman
           patterns: extensions[:geo_pattern].options.default_patterns,
           color: extensions[:geo_pattern].options.default_color,
           base_color: extensions[:geo_pattern].options.default_base_color,
+          content_tag: extensions[:geo_pattern].options.content_tag,
+          html_tag: extensions[:geo_pattern].options.html_tag,
           **options,
           &block
         )
@@ -60,12 +63,18 @@ module Middleman
             color: color,
             base_color: base_color
           )
+          tag_generator = if content_tag == true
+                             :content_tag
+                           else
+                             :tag
+                           end
 
           style = format('background-image: %s', pattern.to_data_uri)
           style += options.delete(:style) if options[:style]
 
-          content_tag(
-            extensions[:geo_pattern].options.html_tag.to_sym,
+          public_send(
+            tag_generator,
+            html_tag,
             nil,
             **options,
             style: style,

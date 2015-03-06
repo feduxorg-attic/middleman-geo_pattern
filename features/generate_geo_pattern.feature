@@ -147,3 +147,39 @@ Feature: Generate GeoPattern
     """
     class="gp-content"
     """
+
+  Scenario: Generate content tag
+    Given a middleman config file with:
+    """
+    activate :geo_pattern
+    """
+    And a source file named "index.erb" with:
+    """
+    <%= geo_pattern 'Mastering Markdown' %>
+    """
+    And the Server is running
+    When I go to "/index.html"
+    Then I should see:
+    """
+    <div
+    """
+    And I should see:
+    """
+    </div>
+    """
+
+  Scenario: Generate no content tag
+    Given a middleman config file with:
+    """
+    activate :geo_pattern
+    """
+    And a source file named "index.erb" with:
+    """
+    <%= geo_pattern 'Mastering Markdown', html_tag: 'img', content_tag: false %>
+    """
+    And the Server is running
+    When I go to "/index.html"
+    Then I should see:
+    """
+    <img
+    """
