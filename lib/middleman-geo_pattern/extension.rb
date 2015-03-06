@@ -67,8 +67,8 @@ module Middleman
           content_tag(
             extensions[:geo_pattern].options.html_tag.to_sym,
             nil,
-            style: style,
             **options,
+            style: style,
             &block
           )
         end
