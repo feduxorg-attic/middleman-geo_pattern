@@ -113,3 +113,21 @@ Feature: Generate GeoPattern
     """
     span
     """
+
+  Scenario: Use block
+    Given a middleman config file with:
+    """
+    activate :geo_pattern
+    """
+    And a source file named "index.erb" with:
+    """
+    <% geo_pattern('Mastering Markdown') do %>
+      <%= content_tag :h1, 'Mastering Markdown' %>
+    <% end %>
+    """
+    And the Server is running
+    When I go to "/index.html"
+    Then I should see:
+    """
+    <h1>
+    """

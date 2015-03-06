@@ -55,6 +55,14 @@ activate :geo_pattern do |g|
 end
 ```
 
+You can also pass a block to geo pattern, to embed some other code within it:
+
+```erb
+<% geo_pattern('Mastering Markdown') do %>
+  <%= content_tag :h1, 'Mastering Markdown' %>
+<% end %>
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)

@@ -51,7 +51,8 @@ module Middleman
           patterns: extensions[:geo_pattern].options.default_patterns,
           color: extensions[:geo_pattern].options.default_color,
           base_color: extensions[:geo_pattern].options.default_base_color,
-          **options
+          **options,
+          &block
         )
           pattern = ::GeoPattern.generate(
             input,
@@ -67,7 +68,8 @@ module Middleman
             extensions[:geo_pattern].options.html_tag.to_sym,
             nil,
             style: style,
-            **options
+            **options,
+            &block
           )
         end
         # rubocop:enable Metrics/MethodLength

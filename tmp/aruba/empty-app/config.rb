@@ -1,1 +1,0 @@
-activate :geo_pattern
