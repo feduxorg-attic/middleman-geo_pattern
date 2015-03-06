@@ -9,13 +9,8 @@ function output_error_log {
 info_msg="\e[0;32m[INFO]\e[0;30m"
 error_msg="\e[0;31mFAILED\e[0;30m"
 
-if [ -n "$CI" ]; then
-  echo -e "$info_msg Testing in CI mode"
-  rake_task='test:ci'
-else
-  echo -e "$info_msg Testing in normal mode"
-  rake_task='test'
-fi
+echo -e "$info_msg Testing in normal mode"
+rake_task='test'
 
 echo -en "$info_msg Running rake task \"$rake_task\" "
 bundle exec rake --trace $rake_task
