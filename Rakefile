@@ -45,52 +45,6 @@ namespace :gem do
   end
 end
 
-desc 'Bootstrap project'
-task bootstrap: %w(bootstrap:bundler)
-
-desc 'Bootstrap project for ci'
-# rubocop:disable Metrics/LineLength
-task 'bootstrap:ci' => %w(bootstrap:shell_environment bootstrap:clean_caches bootstrap)
-# rubocop:enable Metrics/LineLength
-
-namespace :bootstrap do
-  desc 'Bootstrap bundler'
-  task :bundler do |t|
-    puts t.comment
-    sh 'gem install bundler'
-    sh 'bundle install'
-  end
-
-  desc 'Clean bower and bundler caches'
-  task :clean_caches do |t|
-    puts t.comment
-
-    FileUtils.rm_rf File.expand_path('../tmp/bundler_cache', __FILE__)
-    FileUtils.rm_rf File.expand_path('../tmp/bower_cache', __FILE__)
-  end
-
-  desc 'Prepare shell environment for testing'
-  task :shell_environment do |t|
-    puts t.comment
-    ENV['BUNDLE_PATH'] = File.expand_path('../tmp/bundler_cache', __FILE__)
-    ENV['GEM_HOME'] = File.expand_path('../tmp/bundler_cache', __FILE__)
-    # rubocop:disable Metrics/LineLength
-    ENV['bower_storage__packages'] = File.expand_path('../tmp/bower_cache', __FILE__)
-    # rubocop:enable Metrics/LineLength
-
-    puts format('BUNDLE_PATH:   %s', ENV['BUNDLE_PATH'])
-    puts format('GEM_HOME:      %s', ENV['GEM_HOME'])
-    puts format('BOWER_CACHE:   %s', ENV['bower_storage__packages'])
-  end
-
-  desc 'Require gems'
-  task :gem_requirements do |t|
-    puts t.comment
-    require 'bundler'
-    Bundler.require
-  end
-end
-
 namespace :documentation do
   task :inch do
     sh 'inch'
