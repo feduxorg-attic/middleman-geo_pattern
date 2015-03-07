@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    middleman-geo_pattern (0.0.2)
+    middleman-geo_pattern (0.0.3)
       geo_pattern (~> 1.4.0)
       middleman-core (>= 3.3.10)
 

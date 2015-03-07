@@ -78,6 +78,40 @@ Feature: Generate GeoPattern
     When I go to "/index.html"
     Then I should see a geo pattern based on "Mastering Markdown" with patterns "hexagons" with color "#541428"
 
+  Scenario: Set default css class
+    Given a middleman config file with:
+    """
+    activate :geo_pattern do |g|
+      g.css_class = 'gp-content'
+    end
+    """
+    And a source file named "index.erb" with:
+    """
+    <%= geo_pattern 'Mastering Markdown' %>
+    """
+    And the Server is running
+    When I go to "/index.html"
+    Then I should see:
+    """
+    class="gp-content"
+    """
+
+  Scenario: Use css_class
+    Given a middleman config file with:
+    """
+    activate :geo_pattern
+    """
+    And a source file named "index.erb" with:
+    """
+    <%= geo_pattern 'Mastering Markdown', css_class: 'gp-content' %>
+    """
+    And the Server is running
+    When I go to "/index.html"
+    Then I should see:
+    """
+    class="gp-content"
+    """
+
   Scenario: Set tag as string
     Given a middleman config file with:
     """
@@ -139,13 +173,13 @@ Feature: Generate GeoPattern
     """
     And a source file named "index.erb" with:
     """
-    <%= geo_pattern 'Mastering Markdown', class: 'gp-content' %>
+    <%= geo_pattern 'Mastering Markdown', role: :main %>
     """
     And the Server is running
     When I go to "/index.html"
     Then I should see:
     """
-    class="gp-content"
+    role="main"
     """
 
   Scenario: Generate content tag

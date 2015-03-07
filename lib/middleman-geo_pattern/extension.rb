@@ -7,6 +7,7 @@ module Middleman
       option :base_color, nil, 'The base color to use'
       option :is_content_tag, true, 'Is content tag?'
       option :html_tag, :div, 'Tag to generate'
+      option :css_class, nil, 'CSS class for tag'
 
       def initialize(app, options_hash = {}, &block)
         # Call super to build options from the options_hash
@@ -55,6 +56,7 @@ module Middleman
           base_color: extensions[:geo_pattern].options.base_color,
           is_content_tag: extensions[:geo_pattern].options.is_content_tag,
           html_tag: extensions[:geo_pattern].options.html_tag,
+          css_class: extensions[:geo_pattern].options.css_class,
           **options,
           &block
         )
@@ -69,10 +71,10 @@ module Middleman
           style += options.delete(:style) if options[:style]
 
           # rubocop:disable Metrics/LineLength
-          return public_send(:content_tag, html_tag, nil, **options, style: style, &block) if is_content_tag == true
+          return public_send(:content_tag, html_tag, nil, **options, class: css_class, style: style, &block) if is_content_tag == true
           # rubocop:enable Metrics/LineLength
 
-          public_send(:tag, html_tag, **options, style: style)
+          public_send(:tag, html_tag, **options, class: css_class, style: style)
         end
         # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/ParameterLists
