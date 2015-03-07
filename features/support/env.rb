@@ -2,7 +2,12 @@ PROJECT_ROOT_PATH = File.dirname(File.dirname(File.dirname(__FILE__)))
 
 # Pull in all of the gems including those in the `test` group
 require 'bundler'
-Bundler.require :default, :test, :development, :debug
+groups = if ENV.key? 'CI'
+           [:default, :test, :development]
+         else
+           [:default, :test, :development, :debug]
+         end
+Bundler.require(*groups)
 
 require 'simplecov'
 SimpleCov.command_name 'cucumber'
