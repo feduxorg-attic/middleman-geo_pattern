@@ -100,6 +100,30 @@ To set it once only, use the `base_color`-option.
 geo_pattern 'Mastering Markdown', base_color: '#123456'
 ```
 
+### Define css class
+
+To configure a default base color, use the `.default_base_color`-option.
+
+```ruby
+activate :geo_pattern do |g|
+  g.css_class = 'gp-content'
+end
+```
+
+To set it once only, use the `css_class`-option.
+
+```ruby
+geo_pattern 'Mastering Markdown', css_class: 'gp-content'
+```
+
+### Pass other options to tag helper
+
+Unknown options will be passed on to the tag helper.
+
+```ruby
+geo_pattern 'Mastering Markdown', role: main
+```
+
 ### Pass a block to the helper
 
 You can also pass a block to geo pattern, to embed some other code within it:
