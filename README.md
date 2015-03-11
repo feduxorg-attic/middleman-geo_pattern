@@ -70,7 +70,7 @@ geo_pattern 'Mastering Markdown', patterns: [:xes]
 
 ### Define color
 
-To configure a default color, use the `.default_color`-option.
+To configure a default color, use the `.color`-option.
 
 ```ruby
 activate :geo_pattern do |g|
@@ -86,7 +86,7 @@ geo_pattern 'Mastering Markdown', color: '#123456'
 
 ### Define base color
 
-To configure a default base color, use the `.default_base_color`-option.
+To configure a default base color, use the `.base_color`-option.
 
 ```ruby
 activate :geo_pattern do |g|
@@ -102,7 +102,7 @@ geo_pattern 'Mastering Markdown', base_color: '#123456'
 
 ### Define css class
 
-To configure a default base color, use the `.default_base_color`-option.
+To configure a css class color, use the `.css_class`-option.
 
 ```ruby
 activate :geo_pattern do |g|
@@ -114,6 +114,43 @@ To set it once only, use the `css_class`-option.
 
 ```ruby
 geo_pattern 'Mastering Markdown', css_class: 'gp-content'
+```
+
+### Use different html tag
+
+By default the helper will generate a `<div></div>`-tag. If you would like to
+change it, please use the `.html_tag`-option.
+
+```ruby
+activate :geo_pattern do |g|
+  g.html_tag = 'span'
+end
+```
+
+To set it once only, use the `html_tag`-option.
+
+```ruby
+geo_pattern 'Mastering Markdown', html_tag: 'span'
+```
+
+### Create non-content html tags
+
+You would like to use a html tag like `<img>`, you need to set the
+`is_content_tag`-option to `false`.
+
+Change the default:
+
+```ruby
+activate :geo_pattern do |g|
+  g.html_tag       = 'span'
+  g.is_content_tag = false
+end
+```
+
+Change it only once
+
+```ruby
+geo_pattern 'Mastering Markdown', html_tag: 'img', is_content_tag: false
 ```
 
 ### Pass other options to tag helper
